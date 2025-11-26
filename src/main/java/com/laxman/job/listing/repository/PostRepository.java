@@ -1,4 +1,4 @@
-package com.laxman.job.listing;
+package com.laxman.job.listing.repository;
 
 import com.laxman.job.listing.model.JobPost;
 import org.springframework.data.mongodb.repository.MongoRepository;

@@ -1,7 +1,7 @@
-package com.laxman.job.listing.Controller;
+package com.laxman.job.listing.controller;
 
 
-import com.laxman.job.listing.PostRepository;
+import com.laxman.job.listing.repository.PostRepository;
 import com.laxman.job.listing.model.JobPost;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.servlet.http.HttpServletResponse;
