@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/contact")
@@ -16,9 +17,9 @@ public class ContactController {
     private ContactRepository contactRepo;
 
     @PostMapping("/submit")
-    public String submitContact(@RequestBody Contact contact) {
+    public Map<String, String> submit(@RequestBody Contact contact) {
         contactRepo.save(contact);
-        return "Message received successfully";
+        return Map.of("message","Message received successfully");
     }
 
     @GetMapping("/all")
