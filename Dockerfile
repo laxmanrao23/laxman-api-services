@@ -4,8 +4,10 @@ WORKDIR /app
 
 COPY . .
 
+# Build the app (Maven)
 RUN ./mvnw -q -DskipTests package
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "target/laxman-api-services-0.0.1-SNAPSHOT.jar"]
+# Use stable jar name from pom.xml <finalName>app</finalName>
+CMD ["java", "-jar", "target/app.jar"]
