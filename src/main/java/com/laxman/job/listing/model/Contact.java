@@ -10,8 +10,8 @@ public class Contact {
 
     @Id
     private String id;
-    private String name;
+
+    private String fullname;
     private String email;
-    private String phone;
     private String message;
 }
