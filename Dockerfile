@@ -8,4 +8,4 @@ RUN ./mvnw -q -DskipTests package
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "target/job-listing-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/laxman-api-services-0.0.1-SNAPSHOT.jar"]
