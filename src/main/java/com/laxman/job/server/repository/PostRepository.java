@@ -1,6 +1,6 @@
-package com.laxman.job.listing.repository;
+package com.laxman.job.server.repository;
 
-import com.laxman.job.listing.model.JobPost;
+import com.laxman.job.server.model.JobPost;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 

@@ -1,4 +1,4 @@
-package com.laxman.job.listing;
+package com.laxman.job.server;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,11 +17,12 @@ public class CorsConfig {
                 registry.addMapping("/**")
                         .allowedOrigins(
                                 "http://localhost:3000",
+                                "http://localhost:5173",
                                 "https://laxmanrao23.github.io"
                         )
                         .allowedMethods("*")
                         .allowedHeaders("*")
-                        .allowCredentials(false); // keep false for APIs
+                        .allowCredentials(true); // keep false for APIs
             }
         };
     }

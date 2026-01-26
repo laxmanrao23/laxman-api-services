@@ -1,4 +1,4 @@
-package com.laxman.job.listing.model;
+package com.laxman.job.server.model;
 
 import io.micrometer.common.util.StringUtils;
 import org.springframework.data.annotation.Id;

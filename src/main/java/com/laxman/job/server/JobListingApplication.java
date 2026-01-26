@@ -1,4 +1,4 @@
-package com.laxman.job.listing;
+package com.laxman.job.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

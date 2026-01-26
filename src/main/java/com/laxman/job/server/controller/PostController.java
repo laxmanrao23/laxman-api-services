@@ -1,8 +1,8 @@
-package com.laxman.job.listing.controller;
+package com.laxman.job.server.controller;
 
 
-import com.laxman.job.listing.repository.PostRepository;
-import com.laxman.job.listing.model.JobPost;
+import com.laxman.job.server.repository.PostRepository;
+import com.laxman.job.server.model.JobPost;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.coyote.BadRequestException;

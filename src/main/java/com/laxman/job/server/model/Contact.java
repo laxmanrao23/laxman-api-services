@@ -1,4 +1,4 @@
-package com.laxman.job.listing.model;
+package com.laxman.job.server.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

@@ -1,6 +1,6 @@
-package com.laxman.job.listing.repository;
+package com.laxman.job.server.repository;
 
-import com.laxman.job.listing.model.Contact;
+import com.laxman.job.server.model.Contact;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface ContactRepository extends  MongoRepository<Contact, String>{

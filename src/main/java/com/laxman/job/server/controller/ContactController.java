@@ -1,8 +1,8 @@
-package com.laxman.job.listing.controller;
+package com.laxman.job.server.controller;
 
 
-import com.laxman.job.listing.model.Contact;
-import com.laxman.job.listing.repository.ContactRepository;
+import com.laxman.job.server.model.Contact;
+import com.laxman.job.server.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
