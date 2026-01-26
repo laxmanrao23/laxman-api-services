@@ -9,21 +9,24 @@ import java.time.LocalDateTime;
 //@Entity
 //@Table(name = "users")
 @Document(collation = "users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    //@Column(unique = true, nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String password;
 
     private String role;
 
-    @Column(length = 6)
+    //@Column(length = 6)
     private String otp;
 
     private LocalDateTime otpExpiry;

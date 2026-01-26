@@ -20,7 +20,18 @@ public class UserSetupController {
     @PostMapping("/create-user")
     public String createUser(@RequestBody User user) {
 
+        user.setUsername(user.getUsername());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        if (user.geRole() != null) {
+            user.setRole(user.getRole());
+        } else {
+            user.setRole("USER");
+        }
+
+        user.setOtp(user.getOtp());
+        user.setOtpExpiry(null);
+
         userRepository.save(user);
 
         return "User created successfully";
