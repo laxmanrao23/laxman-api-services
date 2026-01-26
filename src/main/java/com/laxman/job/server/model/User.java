@@ -1,11 +1,14 @@
 package com.laxman.job.server.model;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "users")
+//@Entity
+//@Table(name = "users")
+@Document(collation = "users")
 public class User {
 
     @Id
