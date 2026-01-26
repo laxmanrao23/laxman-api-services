@@ -18,7 +18,8 @@ public class CorsConfig {
                         .allowedOrigins(
                                 "http://localhost:3000",
                                 "http://localhost:5173",
-                                "https://laxmanrao23.github.io"
+                                "https://laxmanrao23.github.io",
+                                "https://jwt-auth-app-jade.vercel.app"
                         )
                         .allowedMethods("*")
                         .allowedHeaders("*")
