@@ -8,15 +8,12 @@ import java.time.LocalDateTime;
 
 //@Entity
 //@Table(name = "users")
-@Document(collation = "users")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Document(collection = "user")
 public class User {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id; //Must be string (or objectid)
 
     //@Column(unique = true, nullable = false)
     private String username;
@@ -49,11 +46,11 @@ public class User {
         this.otpExpiry = otpExpiry;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -23,13 +23,8 @@ public class UserSetupController {
         user.setUsername(user.getUsername());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        if (user.geRole() != null) {
-            user.setRole(user.getRole());
-        } else {
-            user.setRole("USER");
-        }
-
-        user.setOtp(user.getOtp());
+        user.setRole("USER");   // default role
+        user.setOtp(null);
         user.setOtpExpiry(null);
 
         userRepository.save(user);
