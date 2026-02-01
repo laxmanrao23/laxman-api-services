@@ -6,5 +6,6 @@ public enum ErrorCode {
     USER_NOT_FOUND,
     INVALID_OTP,
     OTP_EXPIRED,
-    INTERNAL_ERROR
+    INTERNAL_ERROR,
+    INVALID_REQUEST
 }
