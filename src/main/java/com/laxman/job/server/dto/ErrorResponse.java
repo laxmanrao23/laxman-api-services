@@ -1,5 +1,8 @@
 package com.laxman.job.server.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorResponse {
 
     private boolean success = false;

@@ -13,31 +13,17 @@ import com.mongodb.MongoWriteException;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
-    // ✅ Handle duplicate username/email (Mongo unique index)
-    @ExceptionHandler({ DuplicateKeyException.class, MongoWriteException.class })
-    public ResponseEntity<ErrorResponse> handleDuplicate(Exception ex) {
+    @ExceptionHandler(DuplicateKeyException.class)
+    public ResponseEntity<ErrorResponse> handleDuplicate(DuplicateKeyException ex) {
 
-        // Mongo duplicate key error code = 11000
-        if (ex instanceof MongoWriteException mongoEx &&
-                mongoEx.getError().getCode() != 11000) {
+        log.warn("Duplicate user detected", ex);
 
-            log.error("Mongo write error (not duplicate)", ex);
-
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .body(new ErrorResponse(
-                            ErrorCode.INTERNAL_ERROR.name(),
-                            "Database error occurred"
-                    ));
-        }
-
-        log.warn("Duplicate user detected");
-
-        return ResponseEntity.status(HttpStatus.CONFLICT)
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorResponse(
                         ErrorCode.USER_ALREADY_EXISTS.name(),
@@ -45,28 +31,28 @@ public class GlobalExceptionHandler {
                 ));
     }
 
-    // ✅ Missing or malformed request body
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ErrorResponse> handleInvalidRequestBody(
+    public ResponseEntity<ErrorResponse> handleBadRequest(
             HttpMessageNotReadableException ex) {
 
-        log.error("Invalid or missing request body", ex);
+        log.error("Invalid request body", ex);
 
-        return ResponseEntity.badRequest()
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorResponse(
                         ErrorCode.INVALID_REQUEST.name(),
-                        "Invalid or missing request data"
+                        "Invalid or missing request body"
                 ));
     }
 
-    // ✅ Fallback for ALL other errors
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneric(Exception ex) {
 
         log.error("Unexpected error occurred", ex);
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorResponse(
                         ErrorCode.INTERNAL_ERROR.name(),
@@ -74,3 +60,4 @@ public class GlobalExceptionHandler {
                 ));
     }
 }
+

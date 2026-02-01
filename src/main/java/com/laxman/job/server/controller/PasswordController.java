@@ -1,7 +1,9 @@
 package com.laxman.job.server.controller;
 
+import com.laxman.job.server.dto.ErrorResponse;
 import com.laxman.job.server.dto.ForgotPasswordRequest;
 import com.laxman.job.server.dto.ResetPasswordRequest;
+import com.laxman.job.server.exceptions.ErrorCode;
 import com.laxman.job.server.model.User;
 import com.laxman.job.server.repository.UserRepository;
 import com.laxman.job.server.service.EmailService;
@@ -38,7 +40,10 @@ public class PasswordController {
         User user = userService.findByEmail(email);
 
         if (user == null) {
-            return ResponseEntity.badRequest().body("User not found with this email");
+            return ResponseEntity.badRequest().body(new ErrorResponse(
+                    ErrorCode.USER_NOT_FOUND.name(),
+                    "User not found with this email"
+            ));
         }
         String otp = otpService.generateOtp();
         LocalDateTime expiry = otpService.getExpiryTime();
