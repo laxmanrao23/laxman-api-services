@@ -20,7 +20,7 @@ public class EmailService {
         message.setSubject("Password Reset OTP");
         message.setText("Your OTP is: " + otp);
 
-        mailSender.send(message);
+        //mailSender.send(message);
     }
 }
 
