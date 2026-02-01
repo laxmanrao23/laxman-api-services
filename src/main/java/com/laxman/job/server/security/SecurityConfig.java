@@ -36,7 +36,8 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/auth/login",
                                 "/api/auth/forgot-password",
-                                "/api/setup/create-user"
+                                "/api/setup/create-user",
+                                "/api/auth/reset-password"
                         ).permitAll()
                         .anyRequest().authenticated()
                 );
@@ -53,7 +54,8 @@ public class SecurityConfig {
         config.setAllowedOrigins(List.of(
                 "http://localhost:3000",
                 "http://localhost:5173",
-                "https://jwt-auth-app-jade.vercel.app"
+                "https://jwt-auth-app-jade.vercel.app",
+                "https://jwt-auth-l4m5fhtqv-laxmanrao23s-projects.vercel.app/"
         ));
 
         config.setAllowedMethods(List.of(
