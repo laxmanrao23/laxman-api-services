@@ -3,6 +3,8 @@ package com.laxman.job.server.model;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.index.Indexed;
+
 
 import java.time.LocalDateTime;
 
@@ -16,9 +18,11 @@ public class User {
     private String id; //Must be string (or objectid)
 
     //@Column(unique = true, nullable = false)
+    @Indexed(unique = true)
     private String username;
 
     //@Column(nullable = false)
+
     private String password;
 
     private String role;
@@ -28,6 +32,17 @@ public class User {
 
     private LocalDateTime otpExpiry;
     // 🔹 GETTERS & SETTERS
+
+    @Indexed(unique = true)
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
 
     public String getOtp() {

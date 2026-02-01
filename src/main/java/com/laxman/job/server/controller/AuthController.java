@@ -44,56 +44,56 @@ public class AuthController {
         return new LoginResponse(token);
     }
 
-    @PostMapping("/forgot-password")
-    public ResponseEntity<?> forgotPassword(@RequestBody Map<String, String> request) {
+//    @PostMapping("/forgot-password")
+//    public ResponseEntity<?> forgotPassword(@RequestBody Map<String, String> request) {
+//
+//        String username = request.get("username");
+//
+//        User user = userRepository.findByUsername(username)
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//
+//        String otp = String.valueOf(new Random().nextInt(900000) + 100000);
+//
+//        user.setOtp(otp);
+//        user.setOtpExpiry(LocalDateTime.now().plusMinutes(10));
+//
+//        userRepository.save(user);
+//        System.out.println("OTP for " + username + " : " + otp);
+//
+//        return ResponseEntity.ok("OTP sent successfully");
+//    }
 
-        String username = request.get("username");
-
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        String otp = String.valueOf(new Random().nextInt(900000) + 100000);
-
-        user.setOtp(otp);
-        user.setOtpExpiry(LocalDateTime.now().plusMinutes(10));
-
-        userRepository.save(user);
-        System.out.println("OTP for " + username + " : " + otp);
-
-        return ResponseEntity.ok("OTP sent successfully");
-    }
-
-    @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> request) {
-
-        String username = request.get("username");
-        String otp = request.get("otp");
-        String newPassword = request.get("newPassword");
-
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        // 1️⃣ OTP validation
-        if (user.getOtp() == null || !user.getOtp().equals(otp)) {
-            throw new RuntimeException("Invalid OTP");
-        }
-
-        // 2️⃣ Expiry validation
-        if (user.getOtpExpiry().isBefore(LocalDateTime.now())) {
-            throw new RuntimeException("OTP expired");
-        }
-
-        // 3️⃣ Encrypt new password
-        user.setPassword(passwordEncoder.encode(newPassword));
-
-        // 4️⃣ Clear OTP
-        user.setOtp(null);
-        user.setOtpExpiry(null);
-
-        userRepository.save(user);
-
-        return ResponseEntity.ok("Password updated successfully");
-    }
+//    @PostMapping("/reset-password")
+//    public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> request) {
+//
+//        String username = request.get("username");
+//        String otp = request.get("otp");
+//        String newPassword = request.get("newPassword");
+//
+//        User user = userRepository.findByUsername(username)
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//
+//        // 1️⃣ OTP validation
+//        if (user.getOtp() == null || !user.getOtp().equals(otp)) {
+//            throw new RuntimeException("Invalid OTP");
+//        }
+//
+//        // 2️⃣ Expiry validation
+//        if (user.getOtpExpiry().isBefore(LocalDateTime.now())) {
+//            throw new RuntimeException("OTP expired");
+//        }
+//
+//        // 3️⃣ Encrypt new password
+//        user.setPassword(passwordEncoder.encode(newPassword));
+//
+//        // 4️⃣ Clear OTP
+//        user.setOtp(null);
+//        user.setOtpExpiry(null);
+//
+//        userRepository.save(user);
+//
+//        return ResponseEntity.ok("Password updated successfully");
+//    }
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteUser(@RequestBody Map<String, String> request) {

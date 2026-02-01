@@ -26,7 +26,7 @@ public class UserSetupController {
         user.setRole("USER");   // default role
         user.setOtp(null);
         user.setOtpExpiry(null);
-
+        user.setEmail(user.getEmail());
         userRepository.save(user);
 
         return "User created successfully";

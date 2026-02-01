@@ -1,26 +1,41 @@
 package com.laxman.job.server.exceptions;
 
-import org.apache.coyote.BadRequestException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import com.laxman.job.server.dto.ErrorResponse;
+import com.mongodb.MongoWriteException;
 
-@ControllerAdvice
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<Object> handleBadRequest(BadRequestException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.BAD_REQUEST.value());
-        body.put("error", "Bad Request");
-        body.put("message", ex.getMessage());
+    @ExceptionHandler({ DuplicateKeyException.class, MongoWriteException.class })
+    public ResponseEntity<ErrorResponse> handleDuplicate(Exception ex) {
 
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+        log.error("Duplicate user detected", ex);
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ErrorResponse(
+                        ErrorCode.USER_ALREADY_EXISTS.name(),
+                        "User already exists. Please try a different username or email."
+                ));
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleGeneric(Exception ex) {
+
+        log.error("Unexpected error occurred", ex);
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ErrorResponse(
+                        ErrorCode.INTERNAL_ERROR.name(),
+                        "Something went wrong. Please try again later."
+                ));
     }
 }
