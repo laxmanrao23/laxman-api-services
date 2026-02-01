@@ -18,19 +18,20 @@ public class EmailService {
         this.mailSender = mailSender;
     }
 
-    @Async
+    //@Async
     public void sendOtp(String to, String otp) {
         try {
             log.info("Attempting to send OTP email to {}", to);
 
             SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom("proconnect.auth@gmail.com");
             message.setTo(to);
             message.setSubject("Password Reset OTP");
             message.setText("Your OTP is: " + otp);
 
             mailSender.send(message);
         } catch (Exception ex) {
-            log.error("Failed to send OTP meail to {}", to, ex);
+            log.error("Failed to send OTP email to {}", to, ex);
         }
     }
 }
