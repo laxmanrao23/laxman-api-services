@@ -5,7 +5,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/jobs")
-@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = "http://localhost:5173")
 public class JobController {
 
     @GetMapping

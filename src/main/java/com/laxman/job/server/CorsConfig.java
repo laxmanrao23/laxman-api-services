@@ -19,7 +19,8 @@ public class CorsConfig {
                                 "http://localhost:3000",
                                 "http://localhost:5173",
                                 "https://laxmanrao23.github.io",
-                                "https://jwt-auth-app-jade.vercel.app"
+                                "https://jwt-auth-app-jade.vercel.app",
+                                "http://localhost:8080"
                         )
                         .allowedMethods("*")
                         .allowedHeaders("*")

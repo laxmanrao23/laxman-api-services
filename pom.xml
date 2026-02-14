@@ -64,6 +64,14 @@
             <version>${mysql.version}</version>
         </dependency>
 
+        <!-- PostgreSQL -->
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- Mongo Validation -->
         <dependency>
             <groupId>jakarta.validation</groupId>

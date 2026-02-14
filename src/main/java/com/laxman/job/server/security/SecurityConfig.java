@@ -2,6 +2,7 @@ package com.laxman.job.server.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -9,15 +10,22 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 import java.util.List;
 
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
-    // ✅ THIS IS THE MISSING BEAN
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -27,24 +35,27 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-                // 🔥 THIS IS THE KEY LINE
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/api/auth/login",
-                                "/api/auth/forgot-password",
-                                "/api/setup/create-user",
-                                "/api/auth/reset-password"
+                                "/api/auth/**",
+                                "/api/products/**",
+                                "/api/jobs"
                         ).permitAll()
+
+                        .requestMatchers("/api/cart/**")
+                        .authenticated()
+
                         .anyRequest().authenticated()
-                );
+                )
+
+                .addFilterBefore(jwtAuthenticationFilter,
+                        UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
-
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
@@ -55,7 +66,7 @@ public class SecurityConfig {
                 "http://localhost:3000",
                 "http://localhost:5173",
                 "https://jwt-auth-app-jade.vercel.app",
-                "https://jwt-auth-l4m5fhtqv-laxmanrao23s-projects.vercel.app/"
+                "https://jwt-auth-l4m5fhtqv-laxmanrao23s-projects.vercel.app"
         ));
 
         config.setAllowedMethods(List.of(
@@ -75,7 +86,6 @@ public class SecurityConfig {
 
         return source;
     }
-
 }
 
 
