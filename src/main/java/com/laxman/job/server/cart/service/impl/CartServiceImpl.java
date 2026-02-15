@@ -6,6 +6,7 @@ import com.laxman.job.server.cart.dto.CartResponse;
 import com.laxman.job.server.cart.model.CartItem;
 import com.laxman.job.server.cart.repository.CartItemRepository;
 import com.laxman.job.server.cart.service.CartService;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@NoArgsConstructor(force = true)
 public class CartServiceImpl implements CartService {
 
     private static final Logger log =

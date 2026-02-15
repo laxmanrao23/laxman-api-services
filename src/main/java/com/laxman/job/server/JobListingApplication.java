@@ -10,17 +10,17 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 
 // 👉 JPA → ONLY CART (PostgreSQL)
-@EnableJpaRepositories(
-        basePackages = "com.laxman.job.server.cart.repository"
-)
-
-// 👉 MongoDB → USERS + PRODUCTS + JOBS
-@EnableMongoRepositories(
-        basePackages = {
-                "com.laxman.job.server.repository",              // users
-                "com.laxman.job.server.product.repository"       // products
-        }
-)
+//@EnableJpaRepositories(
+//        basePackages = "com.laxman.job.server.cart.repository"
+//)
+//
+//// 👉 MongoDB → USERS + PRODUCTS + JOBS
+//@EnableMongoRepositories(
+//        basePackages = {
+//                "com.laxman.job.server.repository",              // users
+//                "com.laxman.job.server.product.repository"       // products
+//        }
+//)
 
 public class JobListingApplication {
     public static void main(String[] args) {
